@@ -18,6 +18,10 @@ stores = [
 # POST - receive data
 # GET - send data back only
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 # POST - /store data: {name:}
 @app.route('/store', methods=['POST'])
 def create_store():
