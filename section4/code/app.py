@@ -6,6 +6,8 @@ app = Flask(__name__)
 # Api works with resources and every resource needs to be a class
 api = Api(app)
 
+items = []
+
 
 class Student(Resource):
 
