@@ -17,6 +17,11 @@ class Student(Resource):
                 return item
         return {'item': None}, 404
 
+    def post(self, name):
+        item = {'name': name, 'price': 12.01}
+        items.append(item)
+        return item, 201
+
 
 api.add_resource(Student, '/item/<string:name>')  # http://127.0.0.1:5000/student/Fahri
 
