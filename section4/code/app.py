@@ -12,7 +12,10 @@ items = []
 class Student(Resource):
 
     def get(self, name):
-        return {'student': name}
+        for item in items:
+            if name == item['name']:
+                return item
+        return {'item': None}, 404
 
 
 api.add_resource(Student, '/item/<string:name>')  # http://127.0.0.1:5000/student/Fahri
