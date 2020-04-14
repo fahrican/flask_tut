@@ -9,7 +9,7 @@ api = Api(app)
 items = []
 
 
-class Student(Resource):
+class Item(Resource):
 
     def get(self, name):
         for item in items:
@@ -23,6 +23,6 @@ class Student(Resource):
         return item, 201
 
 
-api.add_resource(Student, '/item/<string:name>')  # http://127.0.0.1:5000/student/Fahri
+api.add_resource(Item, '/item/<string:name>')  # http://127.0.0.1:5000/item/cake
 
 app.run(port=5000)
