@@ -23,6 +23,13 @@ class Item(Resource):
         return item, 201
 
 
+class ItemList(Resource):
+
+    def get(self):
+        return {'items': items}, 200
+
+
 api.add_resource(Item, '/item/<string:name>')  # http://127.0.0.1:5000/item/cake
+api.add_resource(ItemList, '/items')  # http://127.0.0.1:5000/items
 
 app.run(port=5000, debug=True)
