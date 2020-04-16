@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 
 
 app = Flask(__name__)  # app is needed for routes
-
+app.secret_key = 'jose'
 api = Api(app)  # Api works with resources & every resource needs to be a class
 
 items = []
