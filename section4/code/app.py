@@ -1,10 +1,10 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 
-app = Flask(__name__)
-# app is needed for routes
-# Api works with resources and every resource needs to be a class
-api = Api(app)
+
+app = Flask(__name__)  # app is needed for routes
+
+api = Api(app)  # Api works with resources & every resource needs to be a class
 
 items = []
 
