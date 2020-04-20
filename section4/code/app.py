@@ -1,10 +1,16 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
+from flask_jwt import JWT, jwt_required, current_identity
+from security import authenticate, identity
 
 
 app = Flask(__name__)  # app is needed for routes
 app.secret_key = 'jose'
 api = Api(app)  # Api works with resources & every resource needs to be a class
+
+app.config['SECRET_KEY'] = 'super-secret'
+
+jwt = JWT(app, authenticate, identity)
 
 items = []
 
@@ -22,7 +28,8 @@ class Item(Resource):
         data = request.get_json()
         item = {'name': name, 'price': data['price']}
         items.append(item)
-        return item, 201
+        access_token = create_access_token(identity={"name": name})
+        return {"access_token": access_token}, 201
 
 
 class ItemList(Resource):
