@@ -70,13 +70,13 @@ def create_user():
     return jsonify({'message': 'New user has been created!'})
 
 
-@app.route('/user/<user_id>', methods=['PUT'])
-def promote_user():
+@app.route('/user/<public_id>', methods=['PUT'])
+def promote_user(public_id):
     return ''
 
 
-@app.route('/user/<user_id>', methods=['DELETE'])
-def delete_user():
+@app.route('/user/<public_id>', methods=['DELETE'])
+def delete_user(public_id):
     return ''
 
 
