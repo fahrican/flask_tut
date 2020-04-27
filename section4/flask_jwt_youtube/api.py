@@ -92,5 +92,28 @@ def delete_user(public_id):
     return jsonify({'message': 'The user has been deleted from database.'})
 
 
+@app.route('/login')
+def login():
+    # When no authorization information is passed
+    auth = request.authorization
+    if not auth or not auth.username or auth.password:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+
+    # When there is no user in the database for the user they passed in
+    user = User.query.filter_by(name=auth.username).first()
+    if not user:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+
+    # When the password is incorrect
+    if check_password_hash(user.password, auth.password):
+        token = jwt.encode({
+            'public_id': user.public_id,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
+            app.config['SECRET_KEY'])
+        return jsonify({'token': token.decode('UTF-8')})
+
+    return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
