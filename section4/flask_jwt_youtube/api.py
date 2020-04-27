@@ -102,7 +102,7 @@ def login():
     # When there is no user in the database for the user they passed in
     user = User.query.filter_by(name=auth.username).first()
     if not user:
-        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+        return make_response('no user in the database', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
     # When the password is incorrect
     if check_password_hash(user.password, auth.password):
