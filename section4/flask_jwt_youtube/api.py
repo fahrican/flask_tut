@@ -96,8 +96,8 @@ def delete_user(public_id):
 def login():
     # When no authorization information is passed
     auth = request.authorization
-    if not auth or not auth.username or auth.password:
-        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+    if not auth or not auth.username or not auth.password:
+        return make_response('no authorization', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
     # When there is no user in the database for the user they passed in
     user = User.query.filter_by(name=auth.username).first()
