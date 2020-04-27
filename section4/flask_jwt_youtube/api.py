@@ -112,7 +112,7 @@ def login():
             app.config['SECRET_KEY'])
         return jsonify({'token': token.decode('UTF-8')})
 
-    return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+    return make_response('password is incorrect', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
 
 if __name__ == '__main__':
